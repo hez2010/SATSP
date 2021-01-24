@@ -7,7 +7,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SATSP.MainWindow"
 		FontFamily="Microsoft YaHei,PingFang SC,WenQuanYi Micro Hei"
-        Title="TSP 解算器 by 17364025 贺恩泽"
+        Title="TSP 解算器"
 		x:DataType="root:MainViewModel">
 	<Grid Margin="8">
 		<Grid.RowDefinitions>

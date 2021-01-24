@@ -4,7 +4,7 @@
 Prerequisties: .NET 5 SDK
 SDK Download: https://dotnet.microsoft.com/download/dotnet/5.0
 
-System: Windows/Linux/macOS 均可
+System: Windows/Linux/macOS
 
 ## Build
 Windows: build.bat
