@@ -13,3 +13,6 @@ Linux/macOS: ./build.sh
 ## Run (with Graphic User Interface):
 Windows: SATSP.exe
 Linux/macOS: ./SATSP
+
+## UI
+![UI](./assets/UI.png)
