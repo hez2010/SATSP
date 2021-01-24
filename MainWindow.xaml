@@ -1,0 +1,78 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:plot="using:OxyPlot.Avalonia"
+		xmlns:root="using:SATSP"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SATSP.MainWindow"
+		FontFamily="Microsoft YaHei,PingFang SC,WenQuanYi Micro Hei"
+        Title="TSP 解算器 by 17364025 贺恩泽"
+		x:DataType="root:MainViewModel">
+	<Grid Margin="8">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid Grid.Row="0" Margin="0,0,0,8" IsEnabled="{CompiledBinding Computing, Converter={StaticResource NotConverter}}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<Label Grid.Column="0" Content="TSP 数据路径" Margin="0,0,8,0" VerticalAlignment="Top" />
+			<TextBox Grid.Column="1" Watermark="位置数据 (.tsp)" Text="{CompiledBinding FileName, Mode=OneWayToSource}" VerticalAlignment="Top" Margin="0,0,8,0" />
+			<TextBox Grid.Column="2" Watermark="参考最优解 (.opt.tour, 可空)" Text="{CompiledBinding TourFileName, Mode=OneWayToSource}" VerticalAlignment="Top" Margin="0,0,8,0" />
+			<Button Grid.Column="3" Content="加载数据" VerticalAlignment="Top" Click="Load_Click"></Button>
+		</Grid>
+		<Grid Grid.Row="1" Margin="0,0,0,8" IsEnabled="{CompiledBinding DataLoaded, Mode=OneWay}">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Grid Margin="0,0,0,8" Grid.Row="0" IsEnabled="{CompiledBinding Computing, Converter={StaticResource NotConverter}}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Button Grid.Column="0" Content="计算最优解" Margin="0,0,8,0" Click="Solve_Click"></Button>
+				<CheckBox Name="SACheck" Grid.Column="1" Content="模拟退火" Margin="0,0,8,0" IsChecked="{CompiledBinding SimulatedAnnealing, Mode=TwoWay}"></CheckBox>
+				<StackPanel Grid.Column="3" Orientation="Horizontal" IsVisible="{CompiledBinding ElementName=SACheck, Path=IsChecked}">
+					<Label Content="温度区间" Margin="0,0,8,0" />
+					<TextBox Text="{CompiledBinding TemperatureMin, Mode=TwoWay}" Margin="0,0,4,0" />
+					<Label Content="-" Margin="0,0,4,0" />
+					<TextBox Text="{CompiledBinding TemperatureMax, Mode=TwoWay}" Margin="0,0,8,0" />
+					<Label Content="降温系数" Margin="0,0,8,0" />
+					<TextBox Text="{CompiledBinding Alpha, Mode=TwoWay}" Margin="0,0,8,0" />
+					<Label Content="单轮迭代次数" Margin="0,0,8,0" />
+					<TextBox Text="{CompiledBinding Iteration, Mode=TwoWay}" />
+				</StackPanel>
+				<StackPanel Grid.Column="3" Orientation="Horizontal" IsVisible="{CompiledBinding ElementName=SACheck, Path=IsChecked, Converter={StaticResource NotConverter}}">
+					<Label Content="迭代次数" Margin="0,0,8,0" />
+					<TextBox Text="{CompiledBinding Iteration, Mode=TwoWay}" />
+				</StackPanel>
+			</Grid>
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1*" />
+					<ColumnDefinition Width="1*" />
+				</Grid.ColumnDefinitions>
+				<plot:Plot Grid.Column="0">
+					<plot:Plot.Series>
+						<plot:AreaSeries DataFieldX="Iteration Times" DataFieldY="Minimal Distance" Items="{CompiledBinding Result}" />
+					</plot:Plot.Series>
+				</plot:Plot>
+				<plot:Plot Grid.Column="1">
+					<plot:Plot.Series>
+						<plot:LineSeries DataFieldX="X" DataFieldY="Y" Items="{CompiledBinding ResultPath}" />
+					</plot:Plot.Series>
+				</plot:Plot>
+			</Grid>
+		</Grid>
+		<TextBox Grid.Row="2" BorderThickness="0" BorderBrush="Transparent" IsReadOnly="True" Text="{CompiledBinding Status, Mode=OneWay}"></TextBox>
+	</Grid>
+</Window>
