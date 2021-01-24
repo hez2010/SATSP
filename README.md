@@ -1,0 +1,15 @@
+# Simulated Annealing Enabled TSP Solver
+
+## Environment
+Prerequisties: .NET 5 SDK
+SDK Download: https://dotnet.microsoft.com/download/dotnet/5.0
+
+System: Windows/Linux/macOS 均可
+
+## Build
+Windows: build.bat
+Linux/macOS: ./build.sh
+
+## Run (with Graphic User Interface):
+Windows: SATSP.exe
+Linux/macOS: ./SATSP
