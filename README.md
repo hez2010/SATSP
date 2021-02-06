@@ -1,5 +1,9 @@
 # Simulated Annealing Enabled TSP Solver
 
+Artificial Intelligence Course Project
+
+Enze He, Sun Yat-sen University 
+
 ## Environment
 Prerequisties: .NET 5 SDK
 SDK Download: https://dotnet.microsoft.com/download/dotnet/5.0
